@@ -148,7 +148,7 @@ if &t_Co > 255
    endif
    hi Boolean         ctermfg=135
    hi Character       ctermfg=144
-   hi Number          ctermfg=135
+   hi Number          ctermfg=93
    hi String          ctermfg=144
    hi Conditional     ctermfg=161               cterm=bold
    hi Constant        ctermfg=135               cterm=bold
