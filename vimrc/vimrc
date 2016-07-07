@@ -199,18 +199,14 @@ endfunction
 "----------------------------------------------------------------
 
 "--------------------------- VUNDLE -----------------------------
-filetype off                   " required!
+filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" let Vundle manage Vundle
-" required!
 Plugin 'gmarik/Vundle.vim'
 
-" My Plugins here:
-"
-" original repos on github
+" Tools
 Plugin 'tpope/vim-fugitive'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
@@ -221,7 +217,6 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'fatih/vim-go'
 Plugin 'majutsushi/tagbar'
 Plugin 'xolox/vim-session'
 Plugin 'xolox/vim-misc'
@@ -230,16 +225,14 @@ Plugin 'danro/rename.vim'
 Plugin 'eparreno/vim-l9'
 Plugin 'wincent/command-t'
 Plugin 'mhinz/vim-startify'
+" Languages
+Plugin 'fatih/vim-go'
 Plugin 'rust-lang/rust.vim'
 Plugin 'haskell/haskell-mode'
-" vim-scripts repos
-"
-" non github repos
-"
 
 call vundle#end()
 
-filetype plugin indent on     " required!
+filetype plugin indent on
 
 " autocmd vimenter * NERDTree
 
@@ -277,7 +270,6 @@ let g:session_autoload = 'no'
 
 "-------------------------- Startify ----------------------------
 let g:startify_custom_header = [
-			\'',
 			\'      ____                 _____   __                    ',
 			\'     / __ \____ _____     /__  /  / /_  ___  ____  ____ _',
 			\'    / / / / __ `/ __ \      / /  / __ \/ _ \/ __ \/ __ `/',
@@ -285,7 +277,6 @@ let g:startify_custom_header = [
 			\'  /_____/\__,_/_/ /_/     /____/_/ /_/\___/_/ /_/\__, /  ',
 			\'                                                /____/   ',
 			\'  Yo. I''m Dan Zheng.',
-			\'',
 			\ ]
 let g:startify_list_order = [
 	\ ['  Recent files:'],
