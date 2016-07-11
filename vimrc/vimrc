@@ -148,6 +148,8 @@ nnoremap <silent> <leader>cd :cd %:p:h<CR>
 nnoremap <silent> <leader>m :w<CR>:mak<CR>
 " Remove trailing whitespaces
 nnoremap <silent> <F6> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
+" Paste from system clipboard without formatting (Mac)
+nnoremap <leader>p :r !pbpaste<CR>
 " Mark window for swapping
 nnoremap <silent> <leader>mw :call MarkWindowSwap()<CR>
 " Swap current window with marked window
@@ -224,11 +226,14 @@ Plugin 'kovisoft/slimv'
 Plugin 'danro/rename.vim'
 Plugin 'eparreno/vim-l9'
 Plugin 'wincent/command-t'
+Plugin 'wincent/terminus'
 Plugin 'mhinz/vim-startify'
 " Languages
 Plugin 'fatih/vim-go'
 Plugin 'rust-lang/rust.vim'
 Plugin 'haskell/haskell-mode'
+" Colors
+Plugin 'google/vim-colorscheme-primary'
 
 call vundle#end()
 
