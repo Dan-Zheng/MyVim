@@ -1,7 +1,7 @@
-" =========================================================================
+
 "                                 vimrc
 " =========================================================================
-"    Copyright (C) 2015-2016 Dan Zheng <zheng321@purdue.edu>
+"    Copyright (C) 2015-2017 Dan Zheng <zheng321@purdue.edu>
 "
 "    Based on the .vimrc of Richard Wei <xinranmsn@gmail.com>
 "
@@ -50,20 +50,50 @@ else
 	set guifont=Menlo:h12
 endif
 
+" Enable autoindent
+" filetype plugin indent on
+
+" Switch off all auto-indenting
+set nocindent
+set nosmartindent
+set noautoindent
+set indentexpr=
+filetype indent off
+filetype plugin indent off
+
+" Line numbering
 set nu
+" Autoindent
 set ai
-set smartindent
+" Smart indent
+" set smartindent
+" Tab size in spaces
 set tabstop=4
+" Shift operator (>> and <<) size in spaces
 set shiftwidth=4
+" Convert tabs to spaces
+set expandtab
+" Show matching brackets
 set showmatch
+" Show line and column number of cursor
 set ruler
-set autoindent
+" Incremental search
 set incsearch
+" Hide mode (disabled because of airline)
 set noshowmode
+" Syntax highlighting
 set syntax=automatic
+" Enable mouse in all modes
 set mouse=a
+" Allow backspace over autoindent, end-of-line, start of insert
+set backspace=indent,eol,start
+
 syntax on
 syntax enable
+
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
 
 if (filereadable(expand("$HOME/.vim/colors/dan-molokai.vim")))
 	colorscheme dan-molokai
@@ -154,7 +184,7 @@ nnoremap <leader>p :r !pbpaste<CR>
 nnoremap <silent> <leader>mw :call MarkWindowSwap()<CR>
 " Swap current window with marked window
 nnoremap <silent> <leader>pw :call DoWindowSwap()<CR>
-" Open startify
+" Open Startify
 nnoremap <silent> <F2> :Startify<CR>
 "---------------------------------------------------------------
 
@@ -208,14 +238,15 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 
-" Tools
+" TOOLS
 Plugin 'tpope/vim-fugitive'
 Plugin 'Lokaltog/vim-easymotion'
+Plugin 'Raimondi/delimitMate'
+" Faster HTML
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-Plugin 'tpope/vim-rails.git'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/nerdcommenter'
@@ -225,19 +256,37 @@ Plugin 'xolox/vim-misc'
 Plugin 'kovisoft/slimv'
 Plugin 'danro/rename.vim'
 Plugin 'eparreno/vim-l9'
+" Fast file navigation
 Plugin 'wincent/command-t'
+" Enhanced terminal integration, cursor shapes
 Plugin 'wincent/terminus'
 Plugin 'mhinz/vim-startify'
-" Languages
-Plugin 'fatih/vim-go'
-Plugin 'rust-lang/rust.vim'
-Plugin 'haskell/haskell-mode'
-" Colors
-Plugin 'google/vim-colorscheme-primary'
+
+" LANGUAGES
+Plugin 'file:///Users/dan/swift-vim'
+Plugin 'digitaltoad/vim-pug'
+Plugin 'xuhdev/vim-latex-live-preview'
+" Plugin 'lervag/vimtex'
+" Plugin 'oblitum/swift-ycm-core'
+
+" COLORS
+" Plugin 'google/vim-colorscheme-primary'
+
+" Vim Snippets
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+" Snippets directories
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "snips"]
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 
 call vundle#end()
-
-filetype plugin indent on
 
 " autocmd vimenter * NERDTree
 
@@ -248,10 +297,22 @@ set hlsearch
 
 augroup filetypedetect
 	au! BufNewFile,BufRead *.plist setf plist
+	au BufNewFile,BufRead *.f set filetype=scheme
+	au BufNewFile,BufRead *.xtx set filetype=tex
+	au BufNewFile,BufRead *.sbt set filetype=scala
 augroup END
 
+"----------------------- NERDCommenter --------------------------
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+"----------------------------------------------------------------
+
+"------------------------ delimitMate ---------------------------
+let delimitMate_expand_cr = 1
+"----------------------------------------------------------------
+
 "----------------------- YouCompleteMe --------------------------
-let g:ycm_auto_trigger = 1
+" let g:ycm_auto_trigger = 1
 let g:EclimCompletionMethod = 'omnifunc'
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 "----------------------------------------------------------------
@@ -306,4 +367,7 @@ let g:startify_change_to_dir          = 1
 let g:startify_session_autoload       = 1
 let g:startify_session_persistence    = 1
 let g:startify_session_delete_buffers = 1
+"---------------------- LaTeX Live Preview ----------------------
+let g:livepreview_previewer = 'open -a Skim'
+" let g:vimtex_view_method = 'skim'
 "----------------------------------------------------------------
