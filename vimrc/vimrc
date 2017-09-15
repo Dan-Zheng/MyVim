@@ -263,14 +263,15 @@ Plugin 'wincent/terminus'
 Plugin 'mhinz/vim-startify'
 
 " LANGUAGES
-Plugin 'file:///Users/dan/swift-vim'
+" For Swift support, follow steps here:
+" https://gist.github.com/jlehikoinen/0d78af6246c1183d96ad
+" Then, change path to your own swift-vim directory.
+if (filereadable(expand('~/swift-vim')))
+    Plugin 'file://~/swift-vim'
+endif
 Plugin 'digitaltoad/vim-pug'
 Plugin 'xuhdev/vim-latex-live-preview'
 " Plugin 'lervag/vimtex'
-" Plugin 'oblitum/swift-ycm-core'
-
-" COLORS
-" Plugin 'google/vim-colorscheme-primary'
 
 " Vim Snippets
 " Track the engine.
